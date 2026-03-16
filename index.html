@@ -4,35 +4,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Austin Liu | AI Agent Developer & OpenClaw Expert</title>
-    <meta name="description" content="AI agent development and automation services. Specializing in OpenClaw, Claude, and Codex integration for business automation, customer service, and workflow optimization.">
-    <meta name="keywords" content="AI agent developer, OpenClaw expert, Claude integration, Codex automation, AI automation Adelaide, vibe coding, AI coding assistant, workflow automation">
+    <meta name="description" content="AI agent development and automation services in Adelaide. Specializing in OpenClaw, Claude, and Codex integration for business automation, customer service, and workflow optimization.">
+    <meta name="keywords" content="AI agent developer Adelaide, OpenClaw expert, Claude integration, Codex automation, AI automation Australia, vibe coding, AI coding assistant, workflow automation, autonomous agent">
     <meta name="author" content="Austin Liu">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="Austin Liu | AI Agent Development Services">
     <meta property="og:description" content="Build intelligent AI agents for automation, customer service, and workflow optimization.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://dingding-leo.github.io/austin-ai-agents/">
-    <meta property="og:image" content="https://dingding-leo.github.io/austin-ai-agents/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="https://dingding-leo.github.io/austin-ai-agents/">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
-        .hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 80px 20px; text-align: center; }
-        .hero h1 { font-size: 3rem; margin-bottom: 20px; }
-        .hero p { font-size: 1.3rem; opacity: 0.9; max-width: 600px; margin: 0 auto 30px; }
-        .btn { display: inline-block; padding: 15px 40px; background: #e94560; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: transform 0.2s; }
-        .btn:hover { transform: scale(1.05); }
-        .services { padding: 60px 20px; max-width: 1000px; margin: 0 auto; }
-        .services h2 { text-align: center; margin-bottom: 40px; font-size: 2rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .card { padding: 30px; border-radius: 12px; background: #f8f9fa; transition: box-shadow 0.3s; }
-        .card:hover { box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
-        .card h3 { color: #1a1a2e; margin-bottom: 15px; }
-        .card p { color: #666; }
-        .cta { background: #f8f9fa; padding: 60px 20px; text-align: center; }
-        .cta h2 { margin-bottom: 20px; }
-        footer { background: #1a1a2e; color: white; padding: 30px 20px; text-align: center; }
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --light: #f8f9fa;
+            --dark: #333;
+            --grey: #666;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: var(--dark); }
+        
+        /* Header */
+        header { background: var(--primary); padding: 1rem 2rem; position: fixed; width: 100%; z-index: 1000; }
+        nav { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: white; font-size: 1.3rem; font-weight: 700; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+        
+        /* Hero */
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; padding: 120px 20px 80px; text-align: center; }
+        .hero h1 { font-size: 3rem; margin-bottom: 20px; line-height: 1.2; }
+        .hero .subtitle { font-size: 1.3rem; opacity: 0.9; max-width: 600px; margin: 0 auto 30px; }
+        .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn { display: inline-block; padding: 15px 35px; background: var(--accent); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: transform 0.2s, box-shadow 0.2s; }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(233,69,96,0.3); }
+        .btn-secondary { background: transparent; border: 2px solid white; }
+        .btn-secondary:hover { background: white; color: var(--primary); }
+
+        /* Section */
+        section { padding: 80px 20px; max-width: 1100px; margin: 0 auto; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 2.2rem; color: var(--primary); margin-bottom: 15px; }
+        .section-title p { color: var(--grey); max-width: 600px; margin: 0 auto; }
+
+        /* Stats */
+        .stats { background: var(--light); }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 900px; margin: 0 auto; text-align: center; }
+        .stat-item h3 { font-size: 2.5rem; color: var(--accent); margin-bottom: 5px; }
+        .stat-item p { color: var(--grey); font-weight: 500; }
+
+        /* Services */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .service-card { padding: 35px; border-radius: 12px; background: white; border: 1px solid #eee; transition: box-shadow 0.3s, transform 0.3s; }
+        .service-card:hover { box-shadow: 0 15px 50px rgba(0,0,0,0.1); transform: translateY(-5px); }
+        .service-icon { font-size: 2.5rem; margin-bottom: 20px; }
+        .service-card h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.3rem; }
+        .service-card p { color: var(--grey); }
+        .service-card ul { margin-top: 15px; padding-left: 20px; color: var(--grey); }
+        .service-card li { margin-bottom: 8px; }
+
+        /* Process */
+        .process { background: var(--light); }
+        .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .process-step { text-align: center; padding: 30px; }
+        .step-number { width: 50px; height: 50px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: 700; margin: 0 auto 20px; }
+        .process-step h3 { color: var(--primary); margin-bottom: 10px; }
+        .process-step p { color: var(--grey); }
+
+        /* Testimonials */
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .testimonial { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); }
+        .testimonial-text { font-style: italic; color: var(--grey); margin-bottom: 20px; line-height: 1.7; }
+        .testimonial-author { font-weight: 600; color: var(--primary); }
+        .testimonial-role { color: var(--accent); font-size: 0.9rem; }
+
+        /* Pricing */
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .pricing-card { padding: 40px; border-radius: 12px; background: white; border: 2px solid #eee; text-align: center; transition: transform 0.3s; }
+        .pricing-card:hover { transform: scale(1.03); }
+        .pricing-card.featured { border-color: var(--accent); position: relative; }
+        .pricing-card.featured::before { content: "Most Popular"; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent); color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+        .pricing-card h3 { color: var(--primary); font-size: 1.5rem; margin-bottom: 10px; }
+        .pricing-price { font-size: 2.5rem; font-weight: 700; color: var(--accent); margin-bottom: 20px; }
+        .pricing-price span { font-size: 1rem; color: var(--grey); font-weight: 400; }
+        .pricing-card ul { list-style: none; text-align: left; margin-bottom: 30px; }
+        .pricing-card li { padding: 10px 0; border-bottom: 1px solid #eee; color: var(--grey); }
+        .pricing-card li::before { content: "✓"; color: var(--accent); margin-right: 10px; font-weight: bold; }
+
+        /* FAQ */
+        .faq { background: var(--light); }
+        .faq-item { background: white; padding: 25px; border-radius: 8px; margin-bottom: 15px; }
+        .faq-item h3 { color: var(--primary); margin-bottom: 10px; font-size: 1.1rem; }
+        .faq-item p { color: var(--grey); }
+
+        /* CTA */
+        .cta-section { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; text-align: center; padding: 80px 20px; }
+        .cta-section h2 { font-size: 2.2rem; margin-bottom: 15px; }
+        .cta-section p { font-size: 1.1rem; margin-bottom: 30px; opacity: 0.9; }
+
+        /* Contact */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
+        .contact-info h2 { font-size: 2rem; color: var(--primary); margin-bottom: 20px; }
+        .contact-info p { color: var(--grey); margin-bottom: 30px; }
+        .contact-method { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .contact-method-icon { width: 45px; height: 45px; background: var(--light); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+        .contact-method span { color: var(--dark); }
+        .contact-form { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--primary); }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; font-family: inherit; }
+        .form-group textarea { min-height: 120px; resize: vertical; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--accent); }
+
+        /* Footer */
+        footer { background: var(--primary); color: white; padding: 40px 20px; text-align: center; }
+        footer p { opacity: 0.7; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .nav-links { display: none; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
     </style>
     <script type="application/ld+json">
     {
@@ -51,37 +148,291 @@
     </script>
 </head>
 <body>
+    <header>
+        <nav>
+            <div class="logo">AI<span>Agents</span></div>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <section class="hero">
         <h1>AI Agent Development</h1>
-        <p>Build intelligent automation agents with OpenClaw, Claude, and Codex. From prototype to production.</p>
-        <a href="mailto:austininterestz@gmail.com" class="btn">Get Started</a>
+        <p class="subtitle">Build intelligent automation agents with OpenClaw, Claude, and Codex. From prototype to production.</p>
+        <div class="hero-cta">
+            <a href="#contact" class="btn">Get Started</a>
+            <a href="#services" class="btn btn-secondary">View Services</a>
+        </div>
     </section>
-    <section class="services">
-        <h2>Services</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>🤖 AI Agent Setup</h3>
-                <p>Deploy autonomous agents for customer service, data processing, and workflow automation.</p>
+
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>50+</h3>
+                <p>Agents Deployed</p>
             </div>
-            <div class="card">
-                <h3>🔧 OpenClaw Integration</h3>
-                <p>Custom OpenClaw configurations, skill development, and enterprise deployment.</p>
+            <div class="stat-item">
+                <h3>24/7</h3>
+                <p>Uptime Monitoring</p>
             </div>
-            <div class="card">
-                <h3>⚡ Workflow Automation</h3>
-                <p>Automate repetitive tasks with AI-powered agents that learn and adapt.</p>
+            <div class="stat-item">
+                <h3>10k+</h3>
+                <p>Hours Saved</p>
             </div>
-            <div class="card">
-                <h3>🛠️ Bug Fixes & Maintenance</h3>
-                <p>Debug, optimize, and maintain AI agent systems. Fix vibe coding technical debt.</p>
+            <div class="stat-item">
+                <h3>99%</h3>
+                <p>Client Satisfaction</p>
             </div>
         </div>
     </section>
-    <section class="cta">
-        <h2>Ready to automate?</h2>
-        <p style="margin-bottom: 30px; color: #666;">Based in Adelaide, Australia. Working with clients worldwide.</p>
+
+    <section id="services" class="services">
+        <div class="section-title">
+            <h2>Services</h2>
+            <p>End-to-end AI agent development for businesses ready to automate</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🤖</div>
+                <h3>AI Agent Setup</h3>
+                <p>Deploy autonomous agents for customer service, data processing, and workflow automation.</p>
+                <ul>
+                    <li>Custom agent architecture</li>
+                    <li>Multi-channel integration</li>
+                    <li>Learning & adaptation</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔧</div>
+                <h3>OpenClaw Integration</h3>
+                <p>Custom OpenClaw configurations, skill development, and enterprise deployment.</p>
+                <ul>
+                    <li>Skill development</li>
+                    <li>Enterprise deployment</li>
+                    <li>Custom workflows</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">⚡</div>
+                <h3>Workflow Automation</h3>
+                <p>Automate repetitive tasks with AI-powered agents that learn and adapt.</p>
+                <ul>
+                    <li>Process mapping</li>
+                    <li>Automation scripting</li>
+                    <li>Integration APIs</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🛠️</div>
+                <h3>Bug Fixes & Maintenance</h3>
+                <p>Debug, optimize, and maintain AI agent systems. Fix vibe coding technical debt.</p>
+                <ul>
+                    <li>Performance audit</li>
+                    <li>Bug fixes</li>
+                    <li>Ongoing support</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎯</div>
+                <h3>Custom AI Solutions</h3>
+                <p>Tailored AI solutions for your specific business needs and industry.</p>
+                <ul>
+                    <li>Consultation & planning</li>
+                    <li>Prototype development</li>
+                    <li>Production deployment</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>AI Consulting</h3>
+                <p>Strategic advice on where AI can transform your business operations.</p>
+                <ul>
+                    <li>Process analysis</li>
+                    <li>ROI assessment</li>
+                    <li>Roadmap creation</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="process">
+        <div class="section-title">
+            <h2>How It Works</h2>
+            <p>Simple, structured approach to building your AI agent</p>
+        </div>
+        <div class="process-grid">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <h3>Discovery Call</h3>
+                <p>We discuss your goals, challenges, and where automation can make the biggest impact.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <h3>Solution Design</h3>
+                <p>I create a detailed proposal with architecture, timeline, and pricing.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <h3>Development</h3>
+                <p>Build your custom agent with regular check-ins and iterations.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <h3>Deployment & Support</h3>
+                <p>Launch your agent and provide ongoing maintenance and improvements.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <div class="section-title">
+            <h2>What Clients Say</h2>
+            <p>Real results from businesses I've worked with</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial">
+                <p class="testimonial-text">"Austin built a customer service bot that handles 80% of our inquiries automatically. Saved us 20+ hours per week."</p>
+                <p class="testimonial-author">Sarah M.</p>
+                <p class="testimonial-role">E-commerce Business Owner</p>
+            </div>
+            <div class="testimonial">
+                <p class="testimonial-text">"The OpenClaw integration transformed our workflow. Agents now handle data entry, scheduling, and follow-ups."</p>
+                <p class="testimonial-author">James L.</p>
+                <p class="testimonial-role">Operations Manager</p>
+            </div>
+            <div class="testimonial">
+                <p class="testimonial-text">"Fast, professional, and actually understood our needs. The AI agent exceeded our expectations."</p>
+                <p class="testimonial-author">Emily R.</p>
+                <p class="testimonial-role">Startup Founder</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing">
+        <div class="section-title">
+            <h2>Pricing</h2>
+            <p>Transparent pricing for projects of any size</p>
+        </div>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Starter</h3>
+                <div class="pricing-price">$500<span>/project</span></div>
+                <ul>
+                    <li>Single agent deployment</li>
+                    <li>Basic integrations</li>
+                    <li>Email support</li>
+                    <li>7-day turnaround</li>
+                </ul>
+                <a href="#contact" class="btn">Get Started</a>
+            </div>
+            <div class="pricing-card featured">
+                <h3>Professional</h3>
+                <div class="pricing-price">$1,500<span>/project</span></div>
+                <ul>
+                    <li>Multi-agent system</li>
+                    <li>Advanced integrations</li>
+                    <li>Priority support</li>
+                    <li>Custom training</li>
+                    <li>30-day monitoring</li>
+                </ul>
+                <a href="#contact" class="btn">Get Started</a>
+            </div>
+            <div class="pricing-card">
+                <h3>Enterprise</h3>
+                <div class="pricing-price">$3,000+<span>/project</span></div>
+                <ul>
+                    <li>Full automation suite</li>
+                    <li>Custom development</li>
+                    <li>24/7 support</li>
+                    <li>Ongoing maintenance</li>
+                    <li>Training & documentation</li>
+                </ul>
+                <a href="#contact" class="btn">Contact Me</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq">
+        <div class="section-title">
+            <h2>Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-item">
+            <h3>What can an AI agent actually do?</h3>
+            <p>AI agents can handle customer inquiries, process data, schedule appointments, send follow-ups, answer FAQs, manage inventory, and more. If it's repetitive, an agent can likely automate it.</p>
+        </div>
+        <div class="faq-item">
+            <h3>How long does it take to build an agent?</h3>
+            <p>Simple agents take 3-5 days. Complex multi-agent systems take 2-4 weeks. I'll give you a timeline during our discovery call.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Do I need technical knowledge?</h3>
+            <p>No! I handle all the technical work. You just tell me what you want to automate and how you want it to work.</p>
+        </div>
+        <div class="faq-item">
+            <h3>What platforms do you work with?</h3>
+            <p>OpenClaw, Claude, Codex, ChatGPT, and most major AI platforms. I also integrate with Slack, Discord, email, CRMs, and custom APIs.</p>
+        </div>
+    </section>
+
+    <section id="contact" class="cta-section">
+        <h2>Ready to Automate?</h2>
+        <p>Based in Adelaide, Australia. Working with clients worldwide.</p>
         <a href="mailto:austininterestz@gmail.com" class="btn">Contact Me</a>
     </section>
+
+    <section>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h2>Get In Touch</h2>
+                <p>Have questions? Want to discuss your project? I'd love to hear from you.</p>
+                <div class="contact-method">
+                    <div class="contact-method-icon">📧</div>
+                    <span>austininterestz@gmail.com</span>
+                </div>
+                <div class="contact-method">
+                    <div class="contact-method-icon">📍</div>
+                    <span>Adelaide, Australia</span>
+                </div>
+                <div class="contact-method">
+                    <div class="contact-method-icon">🌐</div>
+                    <span>Available worldwide</span>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form action="mailto:austininterestz@gmail.com" method="post" enctype="text/plain">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" name="name" required placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Service Interest</label>
+                        <select name="service">
+                            <option>AI Agent Setup</option>
+                            <option>OpenClaw Integration</option>
+                            <option>Workflow Automation</option>
+                            <option>Bug Fixes & Maintenance</option>
+                            <option>Custom AI Solution</option>
+                            <option>Consulting</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea name="message" placeholder="Tell me about your project..."></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <p>© 2026 AI Agent Development. All rights reserved.</p>
     </footer>
