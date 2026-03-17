@@ -1,0 +1,107 @@
+{
+  "generated": "2026-03-04T23:52:18.802Z",
+  "strengths": [
+    {
+      "category": "Language & Code",
+      "tools": [
+        "node",
+        "npm",
+        "npx",
+        "python3",
+        "python3-config",
+        "python3.13",
+        "python3.13-config",
+        "python3.14",
+        "python3.14-config",
+        "gog",
+        "goplaces",
+        "zmqshell.py"
+      ]
+    },
+    {
+      "category": "AI & ML",
+      "tools": [
+        "openai-image-gen",
+        "openai-whisper",
+        "openai-whisper-api",
+        "gemini",
+        "sherpa-onnx-tts",
+        "vacuumlo",
+        "lzmainfo"
+      ]
+    },
+    {
+      "category": "Data",
+      "tools": [
+        "psql",
+        "postgres",
+        "nano-pdf"
+      ]
+    },
+    {
+      "category": "Communication",
+      "tools": [
+        "discord",
+        "slack",
+        "model-usage",
+        "sag",
+        "wacli",
+        "himalaya",
+        "apple-notes",
+        "things-mac",
+        "notion",
+        "trello"
+      ]
+    },
+    {
+      "category": "Media",
+      "tools": [
+        "openai-image-gen",
+        "video-frames",
+        "ffmpeg",
+        "gifgrep",
+        "spotify-player"
+      ]
+    },
+    {
+      "category": "DevOps",
+      "tools": [
+        "enc_recon_frame_test",
+        "make_chlayout_test",
+        "pg_test_fsync",
+        "pg_test_timing",
+        "probetest",
+        "scale_slice_test",
+        "ta_regtest"
+      ]
+    }
+  ],
+  "improvements": [
+    {
+      "category": "Web & Network",
+      "priority": "high",
+      "action": "Install/配置 Web & Network tools"
+    },
+    {
+      "category": "System",
+      "priority": "medium",
+      "action": "Install/配置 System tools"
+    },
+    {
+      "category": "Cloud",
+      "priority": "high",
+      "action": "Install/配置 Cloud tools"
+    },
+    {
+      "category": "Security",
+      "priority": "medium",
+      "action": "Install/配置 Security tools"
+    }
+  ],
+  "nextActions": [
+    "Install missing CLI tools",
+    "Configure more skill integrations",
+    "Add cloud provider support",
+    "Enable more communication channels"
+  ]
+}

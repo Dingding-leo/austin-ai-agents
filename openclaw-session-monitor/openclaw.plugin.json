@@ -1,0 +1,28 @@
+{
+  "id": "session-monitor",
+  "name": "Session Monitor",
+  "description": "Monitor and analyze OpenClaw session patterns",
+  "version": "1.0.0",
+  "kind": "diagnostics",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "trackActivity": {
+        "type": "boolean",
+        "default": true,
+        "description": "Track session activity patterns"
+      },
+      "alertOnIdle": {
+        "type": "boolean",
+        "default": false,
+        "description": "Alert when session is idle too long"
+      },
+      "idleThreshold": {
+        "type": "number",
+        "default": 30,
+        "description": "Minutes before triggering idle alert"
+      }
+    }
+  }
+}

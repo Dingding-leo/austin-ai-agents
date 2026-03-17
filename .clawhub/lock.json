@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "skills": {
+    "meshcore-marketplace": {
+      "version": "1.0.0",
+      "installedAt": 1772561003096
+    },
+    "bounty-hunter-pro": {
+      "version": "1.0.0",
+      "installedAt": 1772723602360
+    }
+  }
+}
