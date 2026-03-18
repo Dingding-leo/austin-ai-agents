@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "name": "Jane Smith",
+    "email": "jane@test.com",
+    "phone": "+9876543210",
+    "service": "consulting",
+    "created_at": "2026-03-18T04:01:48.288409",
+    "status": "new",
+    "follow_up_sent": false
+  }
+]

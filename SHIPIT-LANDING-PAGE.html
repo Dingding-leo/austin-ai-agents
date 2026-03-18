@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShipIt — Build Apps Without Code</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #e5e5e5;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .badge {
+            display: inline-block;
+            background: #1a1a2e;
+            color: #a78bfa;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+        h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #e5e5e5 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle {
+            font-size: 20px;
+            color: #888;
+            margin-bottom: 40px;
+        }
+        .problem {
+            background: #111;
+            border-left: 3px solid #ef4444;
+            padding: 20px 24px;
+            margin-bottom: 40px;
+            border-radius: 0 8px 8px 0;
+        }
+        .problem h3 {
+            color: #ef4444;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .problem p {
+            color: #aaa;
+            font-size: 15px;
+        }
+        .solution h2 {
+            font-size: 28px;
+            margin-bottom: 16px;
+            color: #e5e5e5;
+        }
+        .solution p {
+            color: #888;
+            margin-bottom: 32px;
+            font-size: 16px;
+        }
+        .features {
+            display: grid;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+        .feature {
+            background: #111;
+            padding: 16px 20px;
+            border-radius: 8px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            background: #1a1a2e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #a78bfa;
+            font-size: 12px;
+        }
+        .feature-text {
+            font-size: 14px;
+            color: #aaa;
+        }
+        .feature-text strong {
+            color: #e5e5e5;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .cta-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 32px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .cta-section h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+        .cta-section p {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .email-form {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .email-form input {
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background: #0a0a0a;
+            color: #e5e5e5;
+            font-size: 14px;
+            width: 240px;
+        }
+        .email-form input:focus {
+            outline: none;
+            border-color: #a78bfa;
+        }
+        .email-form button {
+            padding: 12px 24px;
+            background: #a78bfa;
+            color: #0a0a0a;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .email-form button:hover {
+            opacity: 0.85;
+        }
+        .proof {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .proof-item {
+            text-align: center;
+        }
+        .proof-number {
+            font-size: 28px;
+            font-weight: 800;
+            color: #a78bfa;
+        }
+        .proof-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .testimonial {
+            background: #111;
+            padding: 20px 24px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            font-style: italic;
+            color: #888;
+            font-size: 14px;
+            position: relative;
+        }
+        .testimonial::before {
+            content: '"';
+            font-size: 48px;
+            color: #333;
+            position: absolute;
+            top: -10px;
+            left: 16px;
+        }
+        .testimonial-text {
+            position: relative;
+            z-index: 1;
+        }
+        .whats-inside h3 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: #e5e5e5;
+        }
+        .whats-inside ul {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+        .whats-inside li {
+            padding: 8px 0;
+            color: #888;
+            font-size: 14px;
+            display: flex;
+            gap: 8px;
+        }
+        .whats-inside li::before {
+            content: '✓';
+            color: #a78bfa;
+        }
+        .footer {
+            text-align: center;
+            color: #444;
+            font-size: 12px;
+            padding-top: 40px;
+            border-top: 1px solid #1a1a1a;
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: 36px; }
+            .email-form { flex-direction: column; align-items: center; }
+            .email-form input { width: 100%; }
+            .email-form button { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="badge">Early Access — 2026</div>
+        
+        <h1>Build Apps Without Writing Code</h1>
+        <p class="subtitle">A structured Notion template system that takes non-coders from "I have an idea" to "my app is live."</p>
+        
+        <div class="problem">
+            <h3>The Problem</h3>
+            <p>You tried AI app builders. They generate prototypes that look like apps — until you try to ship. Then everything breaks: auth fails, the database won't connect, deployment throws cryptic errors. You end up stuck, frustrated, or paying a developer anyway.</p>
+        </div>
+        
+        <div class="solution">
+            <h2>ShipIt is the system they never gave you.</h2>
+            <p>Not a course. Not a YouTube video. A working template with prompts, checklists, and debug guides that walk you through the actual build — including the messy parts.</p>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">1</div>
+                <div class="feature-text"><strong>MVP Scope Template</strong>Stop adding features. Define what you're shipping before you start.</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">2</div>
+                <div class="feature-text"><strong>Build Sequence</strong>6-step build path from empty folder to working app. Copy-paste prompts included.</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">3</div>
+                <div class="feature-text"><strong>Debug Guide</strong>Fix auth errors, database stalls, and deployment failures without Googling for hours.</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">4</div>
+                <div class="feature-text"><strong>Checkpoint Prompts</strong>Prevent AI context collapse before it wipes your working code.</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">5</div>
+                <div class="feature-text"><strong>Launch Checklist</strong>Get to production without the panic. Deploy to Vercel or Railway with confidence.</div>
+            </div>
+        </div>
+        
+        <div class="proof">
+            <div class="proof-item">
+                <div class="proof-number">5</div>
+                <div class="proof-label">Failure Points Solved</div>
+            </div>
+            <div class="proof-item">
+                <div class="proof-number">50+</div>
+                <div class="proof-label">Projects Analyzed</div>
+            </div>
+            <div class="proof-item">
+                <div class="proof-number">0</div>
+                <div class="proof-label">Lines of Code Needed</div>
+            </div>
+        </div>
+        
+        <div class="testimonial">
+            <div class="testimonial-text">
+                "I analyzed 50 vibe coding projects to find where people get stuck. 
+                Context collapse. Auth + database stalls. Deployment anxiety. 
+                ShipIt solves each one with a specific, structured fix."
+            </div>
+        </div>
+        
+        <div class="whats-inside">
+            <h3>What's Inside</h3>
+            <ul>
+                <li>Notion template with 5 build stages</li>
+                <li>Copy-paste prompts for every build step</li>
+                <li>Debug guide for 12 common errors</li>
+                <li>Checkpoint prompt system</li>
+                <li>Deployment cheatsheet (Vercel + Railway)</li>
+                <li>Launch checklist + first user acquisition guide</li>
+            </ul>
+        </div>
+        
+        <div class="cta-section">
+            <h3>Get Early Access — Free</h3>
+            <p>First 20 people get ShipIt free. In exchange, I just want to know what you built.</p>
+            <form class="email-form" action="#" method="post">
+                <input type="email" name="email" placeholder="your@email.com" required>
+                <button type="submit">Join Waitlist</button>
+            </form>
+        </div>
+        
+        <div class="footer">
+            Built for non-coders who want to actually ship.
+        </div>
+    </div>
+</body>
+</html>

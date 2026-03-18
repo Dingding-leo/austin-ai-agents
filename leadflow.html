@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeadFlow - Never Miss a Lead Again</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent: #10b981;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 1px solid #334155;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #60a5fa, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .tagline {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border: 1px solid #334155;
+        }
+        
+        h2 { margin-bottom: 1rem; font-size: 1.5rem; }
+        
+        .problem {
+            border-left: 4px solid #ef4444;
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .problem h3 { color: #f87171; margin-bottom: 0.5rem; }
+        
+        .solution {
+            border-left: 4px solid var(--accent);
+            padding-left: 1.5rem;
+        }
+        
+        .solution h3 { color: var(--accent); margin-bottom: 0.5rem; }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .feature {
+            background: #0f172a;
+            padding: 1.25rem;
+            border-radius: 8px;
+        }
+        
+        .feature-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .feature-title { font-weight: 600; margin-bottom: 0.25rem; }
+        .feature-desc { font-size: 0.875rem; color: var(--text-muted); }
+        
+        .demo-form {
+            background: #0f172a;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .form-group { margin-bottom: 1rem; }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1rem;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn:hover { background: var(--primary-dark); }
+        .btn-full { width: 100%; }
+        .btn-secondary { background: #334155; }
+        
+        .success {
+            display: none;
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            text-align: center;
+        }
+        
+        .pricing {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .price-card {
+            flex: 1;
+            background: #0f172a;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .price-card.featured {
+            border: 2px solid var(--primary);
+        }
+        
+        .price { font-size: 2rem; font-weight: bold; margin: 0.5rem 0; }
+        .price span { font-size: 1rem; color: var(--text-muted); }
+        .price-card ul { list-style: none; margin: 1rem 0; text-align: left; }
+        .price-card li { padding: 0.25rem 0; color: var(--text-muted); }
+        .price-card li::before { content: "✓ "; color: var(--accent); }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            border-top: 1px solid #334155;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 640px) {
+            .features, .pricing { grid-template-columns: 1fr; flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📩 LeadFlow</h1>
+            <p class="tagline">Never miss a lead again</p>
+            <p style="color: var(--text-muted); margin-top: 1rem;">
+                SMBs lose 67% of leads due to slow follow-up. Fix that.
+            </p>
+        </header>
+        
+        <main>
+            <div class="problem">
+                <h3>😰 The Problem</h3>
+                <p>You get a lead inquiry, but you're busy. 2 hours later, they've moved on. 
+                That's a lost customer. Every missed follow-up = lost revenue.</p>
+            </div>
+            
+            <div class="solution">
+                <h3>✨ The Solution</h3>
+                <p>LeadFlow captures leads instantly and sends automated follow-ups so you never lose a deal.</p>
+            </div>
+            
+            <div class="card">
+                <h2>🎯 Features</h2>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">📝</div>
+                        <div class="feature-title">Lead Capture Form</div>
+                        <div class="feature-desc">Embeddable form for your website</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <div class="feature-title">Instant Notifications</div>
+                        <div class="feature-desc">Get notified via WhatsApp, Telegram, or SMS</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🔄</div>
+                        <div class="feature-title">Auto Follow-Up</div>
+                        <div class="feature-desc">Automatic sequences that feel personal</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">📅</div>
+                        <div class="feature-title">Booking Integration</div>
+                        <div class="feature-desc">Connect with Calendly, Cal.com, or any booking tool</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>🧪 Try It Now</h2>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">Test the lead capture form:</p>
+                
+                <div class="demo-form">
+                    <div class="form-group">
+                        <label for="demo-name">Name</label>
+                        <input type="text" id="demo-name" placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="demo-email">Email</label>
+                        <input type="email" id="demo-email" placeholder="you@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="demo-service">Service Interest</label>
+                        <select id="demo-service">
+                            <option value="consulting">Consulting</option>
+                            <option value="development">Development</option>
+                            <option value="support">Support</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-full" onclick="submitDemo()">Submit Demo</button>
+                    <div class="success" id="demo-success">
+                        ✅ Lead captured! (This is a demo - in production, you'd get notified instantly)
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>💰 Pricing</h2>
+                <div class="pricing">
+                    <div class="price-card">
+                        <h3>Free</h3>
+                        <div class="price">$0<span>/mo</span></div>
+                        <ul>
+                            <li>50 leads/month</li>
+                            <li>Email notifications</li>
+                            <li>Basic form</li>
+                        </ul>
+                        <button class="btn btn-secondary btn-full">Get Started</button>
+                    </div>
+                    <div class="price-card featured">
+                        <h3>Pro</h3>
+                        <div class="price">$29<span>/mo</span></div>
+                        <ul>
+                            <li>Unlimited leads</li>
+                            <li>WhatsApp + Telegram</li>
+                            <li>Auto follow-up sequences</li>
+                            <li>Booking integration</li>
+                            <li>Priority support</li>
+                        </ul>
+                        <button class="btn btn-full">Start Free Trial</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>🚀 Get Started</h2>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    Download the Python script and run it yourself, or contact us for managed hosting.
+                </p>
+                <div style="display: flex; gap: 1rem;">
+                    <button class="btn" onclick="downloadScript()">📥 Download Script</button>
+                    <button class="btn btn-secondary" onclick="contactUs()">💬 Contact Us</button>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Built for small businesses 🇦🇺</p>
+            <p style="margin-top: 0.5rem; font-size: 0.875rem;">
+                Every missed lead is money left on the table.
+            </p>
+        </footer>
+    </div>
+    
+    <script>
+        function submitDemo() {
+            const name = document.getElementById('demo-name').value;
+            const email = document.getElementById('demo-email').value;
+            
+            if (!name || !email) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            console.log('Lead submitted:', { name, email, service: document.getElementById('demo-service').value });
+            document.getElementById('demo-success').style.display = 'block';
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                document.getElementById('demo-success').style.display = 'none';
+            }, 5000);
+        }
+        
+        function downloadScript() {
+            alert('Download leadflow.py from the workspace');
+        }
+        
+        function contactUs() {
+            window.location.href = 'mailto:hello@leadflow.example';
+        }
+    </script>
+</body>
+</html>

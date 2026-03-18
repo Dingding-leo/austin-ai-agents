@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevPortfolio Builder - Launch Your Tech Career</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent: #10b981;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 1px solid #334155;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #60a5fa, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .tagline {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        main {
+            padding: 2rem 0;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #334155;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1rem;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-full {
+            width: 100%;
+        }
+        
+        .preview-section {
+            display: none;
+        }
+        
+        .preview-section.active {
+            display: block;
+        }
+        
+        .preview-frame {
+            background: white;
+            border-radius: 8px;
+            min-height: 400px;
+            color: #333;
+        }
+        
+        .preview-frame iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            border-radius: 8px;
+        }
+        
+        .download-btns {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .feature {
+            background: #0f172a;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .feature-desc {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .testimonials {
+            margin-top: 2rem;
+        }
+        
+        .testimonial {
+            background: #0f172a;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+        
+        .testimonial-author {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            border-top: 1px solid #334155;
+            margin-top: 2rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent);
+            border-radius: 999px;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+        }
+        
+        @media (max-width: 640px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .features {
+                grid-template-columns: 1fr;
+            }
+            .stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 DevPortfolio Builder</h1>
+            <p class="tagline">Generate a star-worthy developer portfolio in minutes</p>
+            
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">45K+</div>
+                    <div class="stat-label">Tech Layoffs (Mar 2026)</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">3 min</div>
+                    <div class="stat-label">To Complete Portfolio</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Free Forever</div>
+                </div>
+            </div>
+            
+            <span class="badge">🔥 Built for laid-off developers</span>
+        </header>
+        
+        <main>
+            <div class="card">
+                <h2>👤 Your Information</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Job Title</label>
+                        <input type="text" id="title" placeholder="Full Stack Developer">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="john@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="github">GitHub Username</label>
+                        <input type="text" id="github" placeholder="johndoe">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="bio">Short Bio</label>
+                        <textarea id="bio" rows="3" placeholder="Passionate developer with 5 years of experience..."></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>💼 Projects</h2>
+                <div id="projects-container">
+                    <div class="form-group">
+                        <label>Project 1 Name</label>
+                        <input type="text" class="project-name" placeholder="E-commerce API">
+                    </div>
+                    <div class="form-group">
+                        <label>Project 1 Description</label>
+                        <textarea class="project-desc" rows="2" placeholder="RESTful API with authentication, payment integration..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Tech Stack (comma separated)</label>
+                        <input type="text" class="project-tech" placeholder="Python, Flask, PostgreSQL, Docker">
+                    </div>
+                </div>
+                
+                <button class="btn" onclick="addProject()">+ Add Another Project</button>
+            </div>
+            
+            <div class="card">
+                <h2>🛠 Skills</h2>
+                <div class="form-group">
+                    <label for="skills">Your Skills (comma separated)</label>
+                    <input type="text" id="skills" placeholder="JavaScript, React, Node.js, Python, AWS, Docker">
+                </div>
+            </div>
+            
+            <button class="btn btn-full" onclick="generatePortfolio()">
+                🚀 Generate My Portfolio
+            </button>
+            
+            <div class="preview-section card" id="preview-section">
+                <h2>👀 Your Portfolio Preview</h2>
+                <div class="preview-frame">
+                    <iframe id="preview-frame" title="Portfolio Preview"></iframe>
+                </div>
+                <div class="download-btns">
+                    <button class="btn" onclick="downloadHTML()">📥 Download HTML</button>
+                    <button class="btn" style="background: #10b981" onclick="copyCode()">📋 Copy Code</button>
+                </div>
+            </div>
+            
+            <div class="card" style="margin-top: 2rem;">
+                <h2>✨ Why DevPortfolio?</h2>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <div class="feature-title">Lightning Fast</div>
+                        <div class="feature-desc">Generate in 3 minutes, deploy instantly</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🎯</div>
+                        <div class="feature-title">Interview Ready</div>
+                        <div class="feature-desc">Projects that hiring managers love</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">� free</div>
+                        <div class="feature-title">100% Free</div>
+                        <div class="feature-desc">No credit card, no limits</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card testimonials">
+                <h2>💬 Success Stories</h2>
+                <div class="testimonial">
+                    <p class="testimonial-text">"Got 3 interviews in my first week after building my portfolio here. The project templates made me look senior even though I'm junior."</p>
+                    <p class="testimonial-author">- Sarah T., Laid off from TechCorp</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"This saved me hours of work. I customized the template and had a deployed site within a day. Landed a job at a startup!"</p>
+                    <p class="testimonial-author">- Mike R., Now at Series B Startup</p>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Built for the developer community 🇦🇺</p>
+            <p style="margin-top: 0.5rem; font-size: 0.875rem;">45,000+ tech workers laid off in March 2026 - we're here to help.</p>
+        </footer>
+    </div>
+    
+    <script>
+        let projectCount = 1;
+        
+        function addProject() {
+            projectCount++;
+            const container = document.getElementById('projects-container');
+            const div = document.createElement('div');
+            div.innerHTML = `
+                <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #334155;">
+                    <div class="form-group">
+                        <label>Project ${projectCount} Name</label>
+                        <input type="text" class="project-name" placeholder="Project name">
+                    </div>
+                    <div class="form-group">
+                        <label>Project ${projectCount} Description</label>
+                        <textarea class="project-desc" rows="2" placeholder="What does this project do?"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Tech Stack</label>
+                        <input type="text" class="project-tech" placeholder="Technologies used">
+                    </div>
+                </div>
+            `;
+            container.appendChild(div);
+        }
+        
+        function generatePortfolio() {
+            const name = document.getElementById('name').value || 'Developer';
+            const title = document.getElementById('title').value || 'Software Engineer';
+            const email = document.getElementById('email').value || 'email@example.com';
+            const github = document.getElementById('github').value || '';
+            const bio = document.getElementById('bio').value || 'Passionate developer building great software.';
+            const skills = document.getElementById('skills').value || 'JavaScript, Python, React';
+            
+            // Collect projects
+            const projectNames = document.querySelectorAll('.project-name');
+            const projectDescs = document.querySelectorAll('.project-desc');
+            const projectTechs = document.querySelectorAll('.project-tech');
+            
+            let projectsHTML = '';
+            for (let i = 0; i < projectNames.length; i++) {
+                const projName = projectNames[i].value || `Project ${i + 1}`;
+                const projDesc = projectDescs[i].value || 'A great project';
+                const projTech = projectTechs[i].value || 'Tech Stack';
+                
+                projectsHTML += `
+                    <div class="project">
+                        <h3>${projName}</h3>
+                        <p>${projDesc}</p>
+                        <div class="tech-stack">${projTech.split(',').map(t => `<span>${t.trim()}</span>`).join('')}</div>
+                    </div>
+                `;
+            }
+            
+            if (!projectsHTML) {
+                projectsHTML = `
+                    <div class="project">
+                        <h3>Featured Project</h3>
+                        <p>A production-ready application showcasing full-stack development skills.</p>
+                        <div class="tech-stack"><span>React</span><span>Node.js</span><span>PostgreSQL</span></div>
+                    </div>
+                `;
+            }
+            
+            const portfolioHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${name} - ${title}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #f1f5f9; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        header { text-align: center; padding: 3rem 0; }
+        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .title { color: #60a5fa; font-size: 1.25rem; margin-bottom: 1rem; }
+        .bio { color: #94a3b8; max-width: 600px; margin: 0 auto 1.5rem; }
+        .links { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; }
+        .links a { color: #60a5fa; text-decoration: none; }
+        .section { margin: 3rem 0; }
+        h2 { font-size: 1.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid #1e293b; padding-bottom: 0.5rem; }
+        .skills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .skill { background: #1e293b; padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.875rem; }
+        .project { background: #1e293b; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; }
+        .project h3 { margin-bottom: 0.5rem; color: #34d399; }
+        .project p { color: #94a3b8; margin-bottom: 1rem; }
+        .tech-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .tech-stack span { background: #334155; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; }
+        .contact { text-align: center; background: #1e293b; padding: 2rem; border-radius: 12px; }
+        .contact a { display: inline-block; background: #2563eb; color: white; padding: 0.75rem 2rem; border-radius: 8px; text-decoration: none; margin-top: 1rem; }
+        footer { text-align: center; padding: 2rem; color: #64748b; font-size: 0.875rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>${name}</h1>
+            <p class="title">${title}</p>
+            <p class="bio">${bio}</p>
+            <div class="links">
+                ${github ? `<a href="https://github.com/${github}">GitHub</a>` : ''}
+                <a href="mailto:${email}">Email</a>
+            </div>
+        </header>
+        
+        <section class="section">
+            <h2>🛠 Skills</h2>
+            <div class="skills">
+                ${skills.split(',').map(s => `<span class="skill">${s.trim()}</span>`).join('')}
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>💼 Projects</h2>
+            ${projectsHTML}
+        </section>
+        
+        <section class="section">
+            <div class="contact">
+                <h2>📬 Let's Connect</h2>
+                <p>Interested in working together? Get in touch!</p>
+                <a href="mailto:${email}">Contact Me</a>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>© ${new Date().getFullYear()} ${name}. Built with DevPortfolio Builder.</p>
+    </footer>
+</body>
+</html>`;
+            
+            document.getElementById('preview-frame').srcdoc = portfolioHTML;
+            document.getElementById('preview-section').classList.add('active');
+            window.generatedHTML = portfolioHTML;
+            
+            // Scroll to preview
+            document.getElementById('preview-section').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function downloadHTML() {
+            const blob = new Blob([window.generatedHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'portfolio.html';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        function copyCode() {
+            navigator.clipboard.writeText(window.generatedHTML);
+            alert('Copied to clipboard!');
+        }
+    </script>
+</body>
+</html>
