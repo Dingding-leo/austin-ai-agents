@@ -244,3 +244,11 @@ Condition: Austin must say "yes" before any live trades.
 - OR give specific entry/exit rules
 - OR say "just flip it" and let me decide
 
+
+### Heartbeat Protocol
+
+- Every 10 minutes, run okx_scanner.py
+- Send brief report to Austin via Telegram message
+- Format: BTC price, RSI, trend, any signals, verdict
+- Keep it under 5 bullets
+
