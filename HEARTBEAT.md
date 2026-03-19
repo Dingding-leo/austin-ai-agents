@@ -1,66 +1,37 @@
-# Heartbeat - Raise Edu Website Agent
+# Heartbeat - BTC Futures Trading System Agent
 
-**Purpose**: Continuously improve Raise Edu website through self-critique and iteration.
+**Purpose**: Build a world-class systematic BTC futures trading system using OKX API.
 
----
+**Mission**: Execute profitable swing/day trades on BTC-USDT perpetual with 5-10x leverage, $50 account, 1% risk per trade.
 
-## Active Projects
+**Current Phase**: Learning modern price action theories (SMC, ICT, price action)
 
-### 1. Raise Edu Website (Priority)
-- **URL**: https://dingding-leo.github.io/austin-tutor/
-- **Name**: Raise Edu
-- **Goal**: SEO, UX, lead generation
-
-### 2. AI Agent Website
-- **URL**: https://dingding-leo.github.io/austin-ai-agents/
+**Everything else is paused.** ShipIt, Raise Edu, all other projects — frozen until this system is profitable.
 
 ---
 
-## Self-Critique Protocol
+## Mission
 
-Every heartbeat, ask:
+Build the most robust, systematic BTC futures trading system possible using:
+- Modern price action (SMC, ICT, order flow)
+- Dynamic position sizing
+- Multi-timeframe analysis
+- Deep market structure analysis
+- Proper risk management
 
-1. **What's weak?** (slow, confusing, broken, ugly)
-2. **What would improve UX?**
-3. **What do users need?**
-4. **What's missing compared to competitors?**
+## Daily Tasks
 
-Then **actually fix** the issues found.
+1. Run market scanner
+2. Analyze market structure
+3. Identify trade setups
+4. Execute if edge present
+5. Log all trades
+6. Refine system based on results
 
----
+## Rules
 
-## UX Improvement Checklist
-
-- [ ] Page load speed
-- [ ] Mobile responsiveness
-- [ ] Call-to-action visibility
-- [ ] Form usability
-- [ ] Navigation clarity
-- [ ] Content readability
-- [ ] Trust signals
-- [ ] Booking flow
-- [ ] Contact ease
-
----
-
-## Session Logging
-
-Log to SESSION-STATE.md each session:
-- What you critiqued
-- What you improved
-- What you still need to fix
-
----
-
-## Heartbeat Protocol (Every 10 mins)
-
-1. Review current website state
-2. Identify 1-2 UX improvements
-3. Implement meaningful fixes
-4. Log progress to SESSION-STATE.md
-
----
-
-## Current Status
-- Website live with basic SEO
-- Need: UX audit and improvements
+- NO other projects until trading system is profitable
+- NO trading without full analysis complete
+- ALWAYS respect 1% max risk per trade
+- ALWAYS attach stop loss before entry
+- NEVER trade against daily trend
