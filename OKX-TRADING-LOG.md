@@ -142,3 +142,105 @@ Condition: Austin must say "yes" before any live trades.
 - min position: 0.00001 BTC
 - taker fee: 0.15%, maker fee: 0.10%
 
+
+### Backtest Results (90 days, Dec 2025 - Mar 2026)
+
+**Market context:** BTC dropped from $88,175 to $69,372 (-21.3%) — bear market
+
+| Strategy | Final Value | Trades | Win Rate |
+|---|---|---|---|
+| Buy & Hold | $39.34 | 0 | N/A |
+| RSI(14) <30/>70 | $44.07 | 3 | 0% |
+| SMA(20/50) Cross | $50.00 | 0 | N/A |
+
+**Key insights:**
+1. In a bear market, no strategy beats not trading
+2. RSI strategy lost money because BTC kept dropping — every "oversold" was a falling knife
+3. SMA crossover got no signal in this period (sideways after initial drop)
+
+**Fee math (for $25 position):**
+- Buy fee (0.15%): $0.0375
+- Sell fee (0.10%): $0.025
+- Total: $0.0625 per round trip
+- As % of $50 account: 0.12% — manageable
+
+**Risk/reward on $25 position:**
+- Stop loss (5%): net loss ~$1.19
+- Take profit (10%): net gain ~$2.44
+- Risk/reward ratio: 1:2.1 — favorable
+
+**What this means:**
+- The strategy CAN work IF the market isn't in a sustained bear drop
+- Need a bull market or sideways market for RSI to work
+- With only $50, we need to be selective about entry timing
+- Consider waiting for RSI < 30 + MACD histogram flip positive
+
+### Next Steps
+1. Monitor BTC price and RSI daily
+2. Wait for signal: RSI < 30 AND MACD histogram positive
+3. Execute ONLY with tdMode="cash" (spot, no leverage)
+4. Position: 50% of balance
+5. Stop loss: 5%, Take profit: 10%
+
+### Futures vs Spot — Key Learnings
+
+**Perpetual Swaps (BTC-USDT-SWAP):**
+- Fee: 0.05% taker, 0.02% maker (vs spot 0.15%/0.10%)
+- Leverage: up to 50x (cross or isolated margin)
+- No expiration date
+- Settles in USDT
+- Contract size: 0.01 BTC per contract (BTC-USDT-SWAP)
+- Funding rate: -0.0005% (very low/neutral)
+
+**Position Sizing for Perpetual Swaps:**
+- Margin required = Position Value / Leverage
+- Example: $100 position @ 5x leverage = $20 margin required
+- With $50 account, 5x leverage, 50% margin used = $25 margin → $125 position
+
+**Stop Loss on Perpetuals:**
+- Can use bracket orders (TP + SL attached to entry)
+- Or set SL as separate algo order
+- Liquidation = when margin hits 0
+
+**What Austin said:** Use futures for swing trades
+- Better fee structure
+- Higher leverage available
+- Good for short-term directional bets
+
+**Plan:**
+1. Study perpetual swap order placement
+2. Build swing trade strategy for BTC perpetual
+3. Test on paper before live
+4. Use 3-5x leverage max for safety
+5. Always use stop loss
+
+
+### Futures Swing Trading — Ready to Execute
+
+**Current Setup:**
+- Account: $50 USDT
+- BTC-USDT Perpetual price: ~$69,589
+- SMA20: $69,898 (below SMA50 $70,116) — bearish trend
+- Leverage: 3x set ✓
+- Position mode: cross margin, net (long/short)
+
+**Plan for next trade:**
+- Wait for SMA(20) to cross above SMA(50) = golden cross = bullish signal
+- OR wait for RSI < 30 oversold + trend reversal
+- Enter LONG with 3x leverage
+- Position size: $100 notional ($33 margin from $50)
+- Stop loss: 5% below entry (~$66,100)
+- Take profit: 10% above entry (~$76,500)
+- Fee: $0.05 per trade (0.05%)
+
+**What I've done so far:**
+- Set 3x leverage on BTC-USDT-SWAP ✓
+- Understood account structure ✓
+- Backtested RSI strategy ✓
+- Calculated position sizing ✓
+
+**What Austin needs to decide:**
+- Approve the trading plan
+- OR give specific entry/exit rules
+- OR say "just flip it" and let me decide
+
