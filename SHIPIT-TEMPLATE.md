@@ -31,7 +31,21 @@ Work through each section in order. Complete one stage before moving to the next
 
 ---
 
-### 1.2 Define Your MVP Scope
+### 1.2 The "Kill Your App" Mindset
+
+**Instructors at a Singapore vibe coding workshop taught this: Don't fall in love with your app.**
+
+When vibe coding is fast, it's smarter to start over than patch a broken product. Killing an app isn't failure — it's feedback.
+
+**Use this check before every build session:**
+
+> "If this feature/fix takes more than 2 hours and the app still doesn't work — would I rather start over?"
+
+If yes → Start a fresh project. Copy your working code into it. Don't keep patching.
+
+---
+
+### 1.3 Define Your MVP Scope
 
 **The ONE thing your app must do to be considered a success:**
 

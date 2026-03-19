@@ -202,6 +202,35 @@
             position: relative;
             z-index: 1;
         }
+        .comparison {
+            background: #111;
+            padding: 20px 24px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+        .comparison h3 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            color: #e5e5e5;
+        }
+        .comparison-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #222;
+            font-size: 14px;
+        }
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
+        .comparison-price {
+            color: #a78bfa;
+            font-weight: 600;
+        }
+        .comparison-price-wrong {
+            color: #ef4444;
+            font-weight: 600;
+        }
         .whats-inside h3 {
             font-size: 18px;
             margin-bottom: 16px;
@@ -294,9 +323,29 @@
         
         <div class="testimonial">
             <div class="testimonial-text">
-                "I analyzed 50 vibe coding projects to find where people get stuck. 
-                Context collapse. Auth + database stalls. Deployment anxiety. 
+                "I analyzed 50 vibe coding projects to find where people get stuck.
+                Context collapse. Auth + database stalls. Deployment anxiety.
                 ShipIt solves each one with a specific, structured fix."
+            </div>
+        </div>
+
+        <div class="comparison">
+            <h3>What You're Comparing</h3>
+            <div class="comparison-row">
+                <span>Weekend workshop (Singapore)</span>
+                <span class="comparison-price-wrong">$200+</span>
+            </div>
+            <div class="comparison-row">
+                <span>ShipIt Template</span>
+                <span class="comparison-price">$29</span>
+            </div>
+            <div class="comparison-row">
+                <span>ShipIt + Video Course</span>
+                <span class="comparison-price">$99</span>
+            </div>
+            <div class="comparison-row">
+                <span>ShipIt + 3 Coaching Calls</span>
+                <span class="comparison-price">$299</span>
             </div>
         </div>
         
