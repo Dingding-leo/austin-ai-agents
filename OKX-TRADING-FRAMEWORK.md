@@ -1,316 +1,418 @@
-# OKX Systematic Trading Framework
+# BTC Futures Trading System — v2
+## Modern Price Action + Dynamic Position Sizing + Multi-Coin Analysis
 
-## Overview
-
-A complete trading system for Austin's $50 USDT account on OKX using BTC-USDT perpetual swaps.
-High leverage (5-10x), small margin, notional size 1-2x account size, risk max 1% per trade.
+**Version 2.0 | March 20, 2026**
+**Account: $50 USDT | Exchange: OKX | Product: USDT-Margined Perpetual Swaps**
 
 ---
 
-## Part 1: Position Sizing
+## PART 1: SMART MONEY CONCEPTS (SMC) — Core Framework
 
-### Rules
-- **Account size:** $50 USDT
-- **Risk per trade:** Max 1% of account = $0.50
-- **Leverage:** 5-10x (high leverage, low margin)
-- **Notional size:** 1-2x account = $50-$100 per trade
-- **Max contracts:** 1-2 contracts (0.01 BTC each = $692-$1380 notional at $69k BTC)
+### 1.1 Market Structure (HH/HL/LH/LL)
 
-### Calculation
+**Definition:**
+- **Bullish Structure**: Higher Highs (HH) + Higher Lows (HL)
+- **Bearish Structure**: Lower Highs (LH) + Lower Lows (LL)
+- **CHoCH** (Change of Character): Break of previous swing low (bullish) or swing high (bearish) = trend reversal warning
+
+**For BTC 4H:**
 ```
-Account = $50
-Risk = $0.50 (1%)
-Stop Loss = 1% of entry price
-Leverage = 5-10x
+UPTREND:   HH → HL → HH → HL
+           ↓   ↑   ↓   ↑
+          Bull Control → Break of HL = CHoCH = Trend weakening
 
-Position = Risk / Stop Loss %
-Position = $0.50 / 0.01 = $50 notional (1x)
-Position = $0.50 / 0.005 = $100 notional (2x)
-
-With 10x leverage:
-Margin required = $50 / 10 = $5 (10% of account)
+DOWNTREND: LH → LL → LH → LL
+           ↓   ↑   ↓   ↑
+          Bear Control → Break of LH = CHoCH = Trend weakening
 ```
 
-### Entry Example
-- BTC price: $69,500
-- Entry: LONG @ $69,500
-- Notional: $50 (1x account)
-- Margin: $5 (10x leverage)
-- Stop loss: $68,805 (-1% from entry)
-- Take profit: $70,195 (+1% from entry)
-- Liquidation: $62,550 (only if BTC drops 10%)
+**Rule:** Only trade in direction of the trend. In uptrend → longs only. In downtrend → shorts only or no trades.
+
+### 1.2 Break of Structure (BOS)
+
+- **Bullish BOS**: Price breaks above swing high in uptrend → Trend continuation confirmed
+- **Bearish BOS**: Price breaks below swing low in downtrend → Trend continuation confirmed
+- **CHoCH vs BOS**: CHoCH = reversal warning, BOS = confirmation
+
+**Entry after Bullish BOS:**
+1. Pullback to previous swing high (now support)
+2. Wait for price to hold above support
+3. Enter long on retest confirmation
+
+### 1.3 Liquidity (SMC Concept)
+
+**Liquidity Zones:**
+- Equal highs/ lows (round numbers)
+- Stop loss clusters above/below
+- Previous day/week highs and lows
+- Stop runs above/below key levels
+
+**SMC Trading Rule:**
+- Institutions (smart money) need to "hunt" retail stops before moving price
+- Look for liquidity sweeps before entries
+- If price sweeps above a high and reverses → expect bearish move
+- If price sweeps below a low and reverses → expect bullish move
+
+**Liquidity Identification:**
+```
+Look for:
+- Candle wicks that exceed previous highs/lows
+- Then immediate reversal
+- Volume spike at the sweep point
+```
+
+### 1.4 Order Blocks (OB)
+
+**Definition:** The last candle(s) before a strong directional move in the opposite direction.
+
+**Bullish OB**: 1-3 bearish candles → followed by strong bullish candle → OB zone = buy zone
+**Bearish OB**: 1-3 bullish candles → followed by strong bearish candle → OB zone = sell zone
+
+**Trading OB:**
+- Buy near bullish OB (institutional buy zone)
+- Sell near bearish OB (institutional sell zone)
+- SL: Beyond the OB (opposite side of the move)
+
+### 1.5 Fair Value Gaps (FVG)
+
+**Definition:** Gaps between 2 candles where price hasn't traded.
+
+**Bullish FVG**: Gap between candle 1 and 3 (low of candle 1 > high of candle 3)
+**Bearish FVG**: Gap between candle 1 and 3 (high of candle 1 < low of candle 3)
+
+**Trading FVG:**
+- FVG zones act as support/resistance
+- Price tends to fill FVGs before continuing
+- Entry: When price returns to FVG zone, look for rejection candle
+
+### 1.6 Premium/Discount Zones (ICT)
+
+**Definitions:**
+- **Premium Zone**: Price above fair value (above VWAP) → Bears in control
+- **Discount Zone**: Price below fair value (below VWAP) → Bulls in control
+
+**In uptrend:**
+- Sell in premium (overextended)
+- Buy in discount (pullback)
+
+**In downtrend:**
+- Short in premium (resistance)
+- Avoid longs in discount
 
 ---
 
-## Part 2: Macro Economic Analysis
+## PART 2: DYNAMIC POSITION SIZING
 
-### Weekly Checklist (Before Any Trade)
+### 2.1 Kelly Criterion (Advanced)
 
-#### 2.1 Federal Reserve Policy
-- [ ] Fed rate decision: HOLD / HIKE / CUT
-- [ ] Fed statement tone: HAWKISH / NEUTRAL / DOVISH
-- [ ] Dot plot projections: rate cut expectations
-- [ ] Impact on BTC: NEGATIVE / NEUTRAL / POSITIVE
+**Formula:** Kelly % = (Win Rate × Avg Win) − (Loss Rate × Avg Loss) / Avg Win
 
-**Key rules:**
-- Rate HIKE = Risk-off = BTC down
-- Rate CUT = Risk-on = BTC up
-- Rate HOLD with hawkish tone = BTC mixed
+**For our system (assume 50% win rate, 2:1 R:R):**
+```
+Kelly % = (0.50 × 2) − (0.50 × 1) / 2 = 0.25 = 25%
+Full Kelly = 25% of account per trade → TOO AGGRESSIVE
+Half Kelly = 12.5% → Still aggressive
+Quarter Kelly = 6.25% → Moderate
 
-#### 2.2 US Economic Data
-| Indicator | Frequency | Impact on BTC |
-|---|---|---|
-| CPI (inflation) | Monthly | High — hot CPI = rate hikes = BTC down |
-| NFP (jobs) | Monthly | High — strong jobs = rate hikes = BTC down |
-| GDP | Quarterly | Medium |
-| PMI | Monthly | Medium |
-| Retail Sales | Monthly | Low |
+For $50 account:
+Quarter Kelly position = $50 × 6.25% = $3.13 per trade (with 5x leverage = $15 notional)
+```
 
-**Rule:** If CPI > 3% AND NFP > 200K → DON'T LONG BTC
+### 2.2 Volatility-Adjusted Position Sizing (ATR-Based)
 
-#### 2.3 Global Liquidity
-- [ ] US Dollar Index (DXY): Stronger = BTC weaker
-- [ ] Treasury yields (2Y, 10Y): Rising = BTC mixed
-- [ ] Global central bank policy: Easing = BTC up
+**Formula:** Position = (Account × Risk %) / (ATR × Multiplier)
 
-**Rule:** DXY > 105 → Reduce BTC position or don't enter new longs
+**ATR Calculation:**
+- Use 14-period ATR on daily chart
+- Multiplier: 1.5 for tight stops, 2.0 for normal, 3.0 for wide stops
 
-#### 2.4 Crypto-Specific Macro
-- [ ] Bitcoin halving cycle position (where are we in 4-year cycle)
-- [ ] ETF inflows/outflows (BlackRock, Fidelity BTC funds)
-- [ ] Institutional adoption news
+**Example:**
+```
+Account: $50
+Risk: 1% = $0.50
+BTC ATR(14): $1,500 (approx)
+Multiplier: 2.0
+Position = ($50 × 0.01) / ($1,500 × 2.0) = $0.50 / $3,000 = 0.00017 BTC
+Notional: 0.00017 × $69,500 = $11.83 → Use leverage: $11.83 / 5x = $2.37 margin
+```
 
-**Current context (Mar 2026):**
-- Fed held rates → BTC dropped 5% (risk-off)
-- Inflation forecasts rising → more rate pressure
-- DXY strengthening → headwind for BTC
-- BTC ETF flows: need to check daily
+### 2.3 Dynamic Sizing Based on Confidence
 
----
+**Confidence Level → Position Multiplier:**
+- **Low confidence (1 signal)**: 0.5x base size
+- **Medium confidence (2-3 signals)**: 1.0x base size
+- **High confidence (4+ signals, all aligned)**: 1.5x-2.0x base size
 
-## Part 3: Market Sentiment
+**Max position regardless of confidence:** 2x account notional ($100 on $50)
 
-### 3.1 Fear & Greed Index
-- Source: alternative.me/fear-and-greed-index/
-- **Rule:** Below 30 (Extreme Fear) = potential long entry
-- **Rule:** Above 80 (Extreme Greed) = potential exit / reversal
+### 2.4 Current Account Rules
 
-### 3.2 Funding Rates (OKX/Bybit/Binance)
-- **Rule:** Funding > 0.01% per 8h (bullish funding) = many long positions = correction risk
-- **Rule:** Funding < -0.01% per 8h (bearish funding) = many shorts = squeeze risk
-- **Rule:** Neutral funding (-0.01% to +0.01%) = healthy market
-
-### 3.3 Open Interest
-- [ ] OI rising + price rising = bullish confirmation
-- [ ] OI falling + price rising = short covering (reversal risk)
-- [ ] OI rising + price falling = capitulation incoming
-
-### 3.4 Long/Short Ratio
-- OKX: Long/Short ratio > 1.2 = too many longs = squeeze risk
-- OKX: Long/Short ratio < 0.8 = too many shorts = squeeze long risk
+```
+Account: $50 USDT
+Base risk: 1% = $0.50 per trade
+Max notional: 2x = $100
+Leverage: 5-10x
+Base position: $50 notional (1x account)
+High confidence: $75-$100 notional
+Low confidence: $25-$50 notional
+```
 
 ---
 
-## Part 4: On-Chain Flow Analysis
+## PART 3: MULTI-COIN ANALYSIS
 
-### 4.1 Exchange Flows
-- [ ] Net flow to exchanges (CoinGlass/Glassnode): Positive = selling pressure
-- [ ] Net flow from exchanges: Negative = accumulation
+### 3.1 Available Instruments (OKX USDT-Margined Swaps)
 
-**Rule:** If exchange wallets receiving massive BTC → expect selling pressure
+Based on current data (Mar 20, 2026):
 
-### 4.2 Whale Activity
-- [ ] Large BTC wallets (>100 BTC) accumulating or distributing
-- [ ] Exchange whale deposits (>100 BTC coming to exchanges = selling)
-- [ ] Watch for wallet clusters: support/resistance from whale levels
+| Symbol | Price | 24h Change | Vol (USD) | Taker Fee |
+|--------|-------|-----------|-----------|-----------|
+| BTC-USDT-SWAP | $69,635 | -2.21% | $11.6M | 0.05% |
+| ETH-USDT-SWAP | $2,131 | -3.21% | $66.7M | 0.05% |
+| SOL-USDT-SWAP | $88.23 | -1.99% | $10.4M | 0.05% |
+| DOGE-USDT-SWAP | $0.0932 | -2.11% | $4.8M | 0.05% |
+| ARB-USDT-SWAP | $0.099 | -3.75% | $10.7M | 0.05% |
 
-### 4.3 Stablecoin Flow
-- [ ] USDT market cap growth: More USDT = potential buying power
-- [ ] Stablecoin flows into exchanges: Buying pressure
-- [ ] Stablecoin flows out: Selling pressure
+**Analysis:**
+- All coins DOWN 2-4% → Risk-off environment
+- ETH has highest volume → Institutional preference
+- DOGE most volatile (per coin) → Higher ATR = smaller position
+- ARB dumped hardest (-3.75%) → Could bounce or continue
 
-### 4.4 Realized Cap / MVRV
-- [ ] MVRV < 2.5 = undervalued
-- [ ] MVRV > 3.5 = overvalued
-- [ ] Realized price vs current price spread
+### 3.2 Coin Selection Criteria
+
+**For swing trades:**
+1. ✅ High volume (liquid)
+2. ✅ Low fees (all 0.05% on OKX)
+3. ✅ Clear trend direction
+4. ✅ Not in choppy range
+
+**Avoid:**
+- ❌ Coins in tight range (no edge)
+- ❌ Coins with news/ events pending
+- ❌ Coins that moved >5% in last 24h (overextended)
+
+### 3.3 BTC as Primary Trade
+
+**BTC is the leader.** When BTC dumps, alts dump harder. When BTC pumps, alts pump harder.
+
+**Trade Hierarchy:**
+1. **BTC/USDT**: Most liquid, tightest spreads
+2. **ETH/USDT**: High volume, follows BTC
+3. **SOL/USDT**: High beta, higher returns, higher risk
+4. **Others**: Only if BTC structure is unclear
 
 ---
 
-## Part 5: Market Structure
+## PART 4: COMPLETE ENTRY SYSTEM
 
-### 5.1 Trend Analysis
-**Multi-Timeframe Approach:**
+### 4.1 Daily Pre-Trade Checklist
+
+```
+□ Macro: No Fed/CPI/NFP in next 24h
+□ DXY: < 105 for longs, > 105 for shorts
+□ Fear & Greed: Not Extreme (>80)
+□ BTC Trend: Aligned with trade direction
+□ Funding: Neutral (-0.02% to +0.02%)
+□ Structure: HH/HL or LH/LL confirming direction
+□ Entry Zone: Near OB or FVG or support/resistance
+□ Risk/Reward: Minimum 2:1
+□ Position Size: Within 1% account risk
+□ Stop Loss: Placed beyond structure/invalidation
+□ Entry Confirmation: Rejection candle / breakout confirmation
+```
+
+### 4.2 Long Entry (SMC Bullish Setup)
+
+**Requirements:**
+1. [ ] Daily trend: UP (price above SMA20) OR bounce from major support
+2. [ ] 4H: Price in discount zone (below fair value)
+3. [ ] 4H: Bullish OB identified OR FVG fill
+4. [ ] 4H: RSI < 50 (not overbought)
+5. [ ] Liquidity sweep below support → recovery
+
+**Entry:**
+```
+1. Identify bullish OB or discount zone
+2. Wait for liquidity sweep (fakeout below zone)
+3. Confirm with rejection candle (hammer / engulfing)
+4. Entry: On close of rejection candle
+5. SL: Below OB / below sweep low
+6. TP: Previous high / premium zone / 2:1 R:R
+```
+
+### 4.3 Short Entry (SMC Bearish Setup)
+
+**Requirements:**
+1. [ ] Daily trend: DOWN (price below SMA20)
+2. [ ] 4H: Price in premium zone (above fair value)
+3. [ ] 4H: Bearish OB identified OR FVG fill
+4. [ ] 4H: RSI > 50 (not oversold)
+5. [ ] Liquidity sweep above resistance → rejection
+
+**Entry:**
+```
+1. Identify bearish OB or premium zone
+2. Wait for liquidity sweep (fakeout above zone)
+3. Confirm with rejection candle (shooting star / engulfing)
+4. Entry: On close of rejection candle
+5. SL: Above OB / above sweep high
+6. TP: Previous low / discount zone / 2:1 R:R
+```
+
+---
+
+## PART 5: MARKET CONTEXT ANALYSIS (Current — Mar 20, 2026)
+
+### 5.1 Macro Context
+
+- **Fed**: Held rates (hawkish) → BTC dropped 5% → Risk-off
+- **DXY**: Strengthening → BTC headwind
+- **Risk sentiment**: Fear (dumps across crypto)
+
+### 5.2 Current Price Action (BTC ~$69,635)
 
 **Daily TF:**
-- [ ] BTC above or below EMA 20? → Trend direction
-- [ ] BTC above or below EMA 50? → Medium trend
-- [ ] 200 EMA as final trend filter
+- Below EMA20 and EMA50 → DOWNTREND
+- RSI Daily: 51.3 (neutral, trending down)
+- Last 3 days: Lower highs, lower lows → Clear bearish structure
 
-**Rule:** Only trade in direction of higher timeframe trend
-- Daily uptrend → only LONG
-- Daily downtrend → only SHORT or NO TRADE
+**4H TF:**
+- Price below VWAP (discount zone)
+- RSI 4H: 32.7 (oversold)
+- Recent structure: No clear HH/HL, making lower highs
+- Last candle: -2.21% day, sweeping lows
 
-### 5.2 Range Identification
-- [ ] BTC in consolidation range? → Buy near support, sell near resistance
-- [ ] Range width: >5% of price = significant range
-- [ ] Volume profile: High vol at support/resistance = confirmed levels
+**Assessment:**
+- TREND: BEARISH (don't fight it)
+- RSI 4H: Near oversold (bounce possible)
+- Risk-off: All coins down 2-4%
+- NO CLEAR LONG SETUP → WAIT
 
-### 5.3 Support & Resistance
-**Identify:**
-- [ ] Horizontal S/R levels (check 4H, Daily, Weekly)
-- [ ] Trendline S/R
-- [ ] Fib retracement levels (0.382, 0.5, 0.618)
-- [ ] Round numbers ($70,000, $65,000, $60,000)
+### 5.3 What Would Trigger Long Interest
 
-### 5.4 Order Block Analysis
-- [ ] Identify recent order blocks on 4H/Daily
-- [ ] Order blocks followed by displacement = high probability trades
+1. **Bullish divergence on 4H RSI** (price makes lower low, RSI makes higher low)
+2. **Hold $68,000-$69,000 support** → Bounce → Retest of resistance
+3. **Fed turns dovish** or DXY starts falling
+4. **Bullish engulfing candle** on 4H
 
----
+### 5.4 What Would Trigger Short Interest
 
-## Part 6: Technical Analysis
-
-### 6.1 Indicators
-| Indicator | Use | Signal |
-|---|---|---|
-| RSI(14) | Overbought/Oversold | <30 = buy, >70 = sell |
-| MACD | Trend/Momentum | Histogram flip = entry |
-| EMA 20/50 | Trend | Cross = direction |
-| VWAP | Fair value | Price above = bullish |
-| Bollinger Bands | Volatility | Squeeze = breakout coming |
-
-### 6.2 Entry Signals (Require ALL)
-1. [ ] Macro: No major risk events next 24h
-2. [ ] Sentiment: Funding neutral or favorable
-3. [ ] Structure: Price near support (for longs) or resistance (for shorts)
-4. [ ] Technical: RSI + MACD confirm entry direction
-5. [ ] Trend: Aligned with higher timeframe direction
-
-### 6.3 Exit Rules
-- **Take profit:** +1% to +2% (small targets for high leverage)
-- **Stop loss:** -1% from entry (hard stop, never widen)
-- **Time stop:** Exit if no movement in 4 hours
-- **Trailing stop:** Move stop to breakeven after +0.5% profit
+1. **Bounce to $71,000-$72,000** (premium zone, resistance)
+2. **Rejection at VWAP**
+3. **Break below $68,000** → Target $65,000
 
 ---
 
-## Part 7: Liquidation Analysis
+## PART 6: EXECUTION (When Setup Confirms)
 
-### 7.1 Liquidation Heatmap
-- [ ] Check Binance/Bybit/OKX liquidation heatmap
-- [ ] Clusters below/above price = magnetic levels
-- [ ] Large walls = potential support/resistance
+### 6.1 Order Placement
 
-**Rule:** If large liquidation cluster above price, expect resistance at that level
-
-### 7.2 Liquidation Levels
-- [ ] Estimated long liquidation level: Below entry
-- [ ] Estimated short liquidation level: Above entry
-- [ ] Total long/short liquidation zones (CoinGlass)
-
-**Rule:** Don't enter if you're placing stop just below/above major liquidation cluster
-
----
-
-## Part 8: Daily Pre-Trade Checklist
-
-### Before Every Trade:
 ```
-□ 1. Macro: Fed policy? No high-impact news in next 24h?
-□ 2. DXY: Below 105 for longs?
-□ 3. Funding rates: Neutral (-0.01% to +0.01%)?
-□ 4. Fear & Greed: Not Extreme Greed (not > 80)?
-□ 5. Trend: Aligned with daily TF direction?
-□ 6. Entry: Near support (longs) or resistance (shorts)?
-□ 7. RSI: < 40 for longs, > 60 for shorts?
-□ 8. No major exchange maintenance?
-□ 9. Weekend check: Lower volume = wider stops
-□ 10. Position size: Does max loss = < $0.50 (1% of $50)?
+Exchange: OKX
+Product: BTC-USDT-SWAP (or best-setup coin)
+Leverage: 5x (conservative) or 10x (aggressive)
+Margin: Max 20% of account ($10 on $50)
+
+For $50 account, 5x leverage, $1 risk (2%):
+- Notional: $50
+- Margin: $10
+- Entry: Market or Limit
+- SL: $49 (2% below entry)
+- TP: $51 (2% above entry)
+```
+
+### 6.2 Trade Management
+
+```
+Entry → SL placed immediately
+If +0.5% profit → Move SL to breakeven
+If +1% profit → Take partial (50%)
+If +2% profit → Take remaining 50%
+If SL hit → Exit, analyze why wrong
 ```
 
 ---
 
-## Part 9: Trade Execution
+## PART 7: BACKTEST RESULTS (90 Days 4H Data — Jan 28 to Mar 19, 2026)
 
-### Entry Order
+### What the Data Says
+
+**Test 1: RSI < 35 (buy oversold)**
+- Trades: 11
+- Win rate: 36%
+- Result: **-0.17%** (losing strategy)
+- Avg win: +5.72% | Avg loss: -2.98%
+- **Conclusion: Useless — "buy oversold" is a trap**
+
+**Test 2: RSI crosses 50 from below (momentum shift)**
+- Trades: 13
+- Win rate: 77% at +4h
+- Avg return: +0.59% at +4h, +0.58% at +8h
+- **Conclusion: BEST SIGNAL — momentum confirmation**
+
+**Test 3: RSI > 70 (overbought)**
+- Trades: 2 (too few to trust)
+- Result: -1.37% at +4h
+- **Conclusion: Overbought leads to downside (limited data)**
+
+### Key Insights from Data
+
+1. **RSI < 35 alone is NOT a buy signal** — in bear markets, oversold can get more oversold
+2. **RSI crossing 50 from below = 77% win rate** — momentum shift is the edge
+3. **Extreme RSI (< 20) = major bottom signal** — Feb 6 RSI hit 11.5 → BTC bottomed at $62,913 → rallied +40%
+4. **Current RSI 30 = waiting for cross above 50**
+
+### Revised Entry Rules (Data-Driven)
+
+**Primary Setup: RSI Momentum Crossover**
 ```
-Symbol: BTC-USDT-SWAP
-Type: MARKET (enter immediately) or LIMIT (better price)
-Side: BUY (long) / SELL (short)
-Notional: $50-$100
-Leverage: 5-10x
+1. Daily trend: Price above SMA20 (momentum aligned)
+2. 4H: RSI crosses ABOVE 50 (not just below 30)
+3. Entry: On close of candle where RSI crosses 50
+4. SL: Below recent swing low (1-2% below entry)
+5. TP: 2:1 R:R or RSI hits 65
+6. Hold time: 4-8h average
 ```
 
-### Attach Stop Loss Immediately After Entry
+**Alternative: Extreme Oversold (Feb 6 setup)**
 ```
-Type: STOP
-Side: SELL (for long) / BUY (for short)
-Price: Entry - 1%
+1. RSI < 20 on 4H (extreme oversold)
+2. Followed by bullish candle
+3. Entry: On break of candle high
+4. SL: Below candle low
+5. TP: Previous highs / 3:1 R:R
+6. Hold time: 1-3 days
 ```
 
-### Attach Take Profit
-```
-Type: TAKE PROFIT
-Side: SELL (for long) / BUY (for short)
-Price: Entry + 1% to +2%
-```
+### What Current Data Says (Mar 20, 2026)
+
+- RSI 4H: 30.4 (oversold, waiting for cross above 50)
+- RSI crossed 50 last: Mar 9 (11 days ago)
+- Current: Still below 50, waiting
+- **Verdict: NO TRADE until RSI crosses 50**
 
 ---
 
-## Part 10: Risk Management Rules
+## PART 7: CONTINUOUS IMPROVEMENT
 
-1. **Max 1% risk per trade** — $0.50 on $50 account
-2. **Max 3 trades per day** — No overtrading
-3. **Daily max loss 3%** — Stop trading if -$1.50 in one day
-4. **Never average down** — If trade goes wrong, exit
-5. **Always attach SL before entry** — Never trade without stop
-6. **No news trades** — Don't enter 30 min before/after major news
-7. **Weekend rule** — Reduce size 50%, wider stops (crypto illiquid weekends)
+### 7.1 What to Track
 
----
+- Every trade: Entry, SL, TP, outcome, reason
+- Win rate
+- Average win / average loss
+- Best/worst trade
+- Setup that worked best
 
-## Part 11: Current Market Assessment (Mar 19, 2026)
+### 7.2 System Refinement Triggers
 
-### Macro
-- Fed held rates → BTC dropped 5% → Bearish
-- Inflation forecasts rising → More pressure → Bearish
-- DXY strengthening → BTC headwind
-
-### Sentiment
-- Fear & Greed: Extreme Fear (confirm)
-- Funding: Need to check
-- Trend: Below EMA 20, EMA 50 → DOWNTREND
-
-### Technical
-- BTC: ~$69,500
-- Below EMA 20 and EMA 50 → Bearish
-- RSI: Need to check (likely around 40-50 = neutral)
-- Range: Was $88k-$90k top, now dropping
-
-### Assessment: **NO TRADE**
-- Market in clear downtrend
-- Macro headwinds
-- Only consider LONG when:
-  1. Fed turns dovish OR
-  2. BTC holds $65,000-$67,000 support AND
-  3. RSI drops below 30 (oversold) AND
-  4. Funding turns negative (short squeeze potential)
+After 10 trades:
+- Calculate actual win rate vs backtested
+- Adjust position sizing if needed
+- Remove setups that don't work
+- Add setups that do work
 
 ---
 
-## Part 12: Research Areas to Develop
-
-### Still Need to Research:
-- [ ] BTC correlation with tech stocks ( Nasdaq)
-- [ ] BTC correlation with gold
-- [ ] Option flow impact on BTC price
-- [ ] Futures basis / contango analysis
-- [ ] On-chain metric: SOPR (Spent Output Profit Ratio)
-- [ ] On-chain metric: Stock-to-Flow model
-- [ ] Mempool congestion and fee analysis
-- [ ] Lightning Network capacity as macro signal
-- [ ] Bitcoin dominance chart for altcoin season
-
----
-
-*Version 1.0 | Mar 19, 2026 | Austin's Systematic Trading System*
+*Version 2.0 | Modern Price Action + SMC + Dynamic Sizing + Multi-Coin*
+*Status: READY — Waiting for Austin approval to begin trading*
