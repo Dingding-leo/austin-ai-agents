@@ -72,11 +72,22 @@ Top 5 failure points — ShipIt addresses ALL of them:
 |---|---|---|
 | Context window collapse (AI loses track) | #1 killer | Structured prompting + checkpoint prompts |
 | Auth + database stall | 80% of projects | Dedicated Supabase/auth debug module |
-| Weak prompt quality | Universal | "Brief like a junior dev" prompt library |
+| Weak prompt quality | Universal | Prompt library with context + constraints |
 | Deployment anxiety | Very common | Deployment debug checklist |
 | No stopping point / scope creep | Common | MVP scope template + "when to stop" checklist |
 
-**This data proves the problem is real, well-documented, and has no comprehensive solution yet.**
+## NEW VALIDATION: Business Insider — Vibe Coding Workshop (Today, Mar 18, 2026)
+
+Business Insider published a first-person account from a non-technical person who took a **paid weekend vibe coding workshop** in Singapore.
+
+Key quotes:
+- *"The internet is noisy. I wanted structure, guardrails."* — exactly what ShipIt provides
+- Built a personal trainer app in **1 hour** using Manus AI
+- *"I wanted to ask experienced builders questions in real time."* — why structured support works
+
+**Key insight:** People are paying real money ($200+ workshop) for exactly what ShipIt delivers as a $29 template. This validates both the model and the price point.
+
+**The problem is real. People are paying to solve it. ShipIt is the affordable version.**
 
 ## What Austin Brings
 
